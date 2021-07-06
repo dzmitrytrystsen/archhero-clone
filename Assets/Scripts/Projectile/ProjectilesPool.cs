@@ -9,7 +9,7 @@ public class ProjectilesPool : MonoBehaviour
     [SerializeField] private GeneralProjectile _projectilePrefab;
 
     private readonly int _amountToPool = 10;
-    private readonly List<GameObject> _pooledProjectiles = new List<GameObject>();
+    private readonly List<GameObject> _pooledProjectiles = new List<GameObject>(); // почему бы не хранить тут сразу ссылки на GeneralProjectile? Так было бы удобнее
 
     private void Awake()
     {

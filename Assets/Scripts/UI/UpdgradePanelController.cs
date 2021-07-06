@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpdgradePanelController : MonoBehaviour
 {
-    [SerializeField] private GameObject _upgradePanel;
+    [SerializeField] private GameObject _upgradePanel; // почему не  UpgradePanel _upgradePanel ?
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private LevelCounter _levelManager;
     [SerializeField] private GameStateMachine _gameStateMachine;

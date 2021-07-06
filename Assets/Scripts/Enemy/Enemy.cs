@@ -32,7 +32,7 @@ public class Enemy : Unit
         if (_isReadyToAct)
         {
             Action();
-            StartCoroutine(GetPlayerPositionAndWait());
+            StartCoroutine(GetPlayerPositionAndWait()); // Довольно запутанная логика. ЗАчем мешать корутину и апдейт? Лучше или то или то использовать
             _isReadyToAct = false;
         }
     }

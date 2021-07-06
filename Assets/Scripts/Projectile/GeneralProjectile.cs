@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class GeneralProjectile : MonoBehaviour
 {
-    public int SetDamage { set { _damage = value; } }
+    public int SetDamage { set { _damage = value; } } // SetSMTH назыввают обычно методы а не проперти. Так что лучше это сделать методом и добавить валидацию данных. Чтобы там не появился урон меньше 0 и прочее
 
     public delegate void ReadyToReturnToThePoolAction(GameObject projectile);
     public event ReadyToReturnToThePoolAction OnReadyToReturnToThePool;

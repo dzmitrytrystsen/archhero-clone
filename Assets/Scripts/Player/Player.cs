@@ -19,7 +19,7 @@ public class Player : Unit
     public delegate void MaxHealthIncreaseAction(int newMaxHealthValue);
     public event MaxHealthIncreaseAction OnHealthIncreased;
 
-    public event MaxHealthIncreaseAction OnHealed;
+    public event MaxHealthIncreaseAction OnHealed; // events обычно пишут в самом верху класса
 
     [SerializeField] public Animator Animator;
     public Joystick Joystick { get { return _joystick; } }
@@ -36,7 +36,7 @@ public class Player : Unit
 
     private Vector3 _moveDirection;
     private Enemy[] _enemies;
-    private Enemy _nearestEnemy;
+    private Enemy _nearestEnemy; // зачем тут эта переменная если она используется только в одном месте. просто можно сделать чтобы DetectNearestEnemy возвращал врага когда это нужно. незачем постоянно хранить его
     private bool _ifShooted;
 
     private Dictionary<Type, IPlayerBehavior> _behaviorsMap;

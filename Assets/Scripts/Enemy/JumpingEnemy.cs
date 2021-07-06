@@ -13,7 +13,7 @@ public class JumpingEnemy : Enemy
         _jumpForce = Random.Range(2f, 3f);
     }
 
-    protected override void Update()
+    protected override void Update() // опять же пустой метод лучше удалить
     {
         base.Update();
     }
@@ -23,7 +23,7 @@ public class JumpingEnemy : Enemy
         StartCoroutine(JumpTowardsPlayer());
     }
 
-    private IEnumerator JumpTowardsPlayer()
+    private IEnumerator JumpTowardsPlayer() // метод можно упростить и сделать более лаконичным. По сути 38 и 39 строчки делают тоже самое что и 48 и 49. 
     {
         Vector3 lastPlayerPosition = _lastPlayerPosition;
         Vector3 lastDirectionToPlayer = lastPlayerPosition - transform.position;

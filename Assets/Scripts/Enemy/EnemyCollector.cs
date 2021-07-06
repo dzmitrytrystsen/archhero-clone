@@ -46,7 +46,7 @@ public class EnemyCollector : MonoBehaviour
         }
     }
 
-    private void TryToCollectEnemy(int enemyHealth, GameObject enemy)
+    private void TryToCollectEnemy(int enemyHealth, GameObject enemy) // ѕочему сюда сразу не передать Unit enemy и привести его к Enemy? Ёто будет дешевле нежели вызывать GetComponent
     {
         if (enemyHealth <= 0)
         {
@@ -57,7 +57,7 @@ public class EnemyCollector : MonoBehaviour
         }
     }
 
-    private void TryToCompleteLevel()
+    private void TryToCompleteLevel() // плоха€ архитектура. ѕочему скрипт отвечающий за врагов окрывавет портал который относитс€ к уровню?
     {
         if (_enemiesAmount <= 0)
         {

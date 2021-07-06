@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class RoomSwitcher : MonoBehaviour
 {
-    [SerializeField] private Fader _fader;
-    [SerializeField] GameStateMachine _gameStateMachine;
+    [SerializeField] private Fader _fader; 
+    [SerializeField] GameStateMachine _gameStateMachine; // старайс€ придерживатьс€ одного код стайла. ≈сли начал у всех писать можификатор доступа то и пиши у всех. Ќа работу игры не скажетс€ но код выгл€дит при€тнее.
+    // вот 1 из примеров код стайла https://avangarde-software.com/unity-coding-guidelines-basic-best-practices/
     [SerializeField] EnemyCollector _enemyCollector;
     [SerializeField] private List<GameObject> _rooms = new List<GameObject>();
 
@@ -28,10 +29,10 @@ public class RoomSwitcher : MonoBehaviour
 
     private IEnumerator SwitchRoomProcess()
     {
-        var WaitForFadeEnd = new WaitForSeconds(_fader.FadeDuration);
+        var WaitForFadeEnd = new WaitForSeconds(_fader.FadeDuration); // ѕо сути можно было избавитьс€ от корутины если бы у Fader был ивент который бы дергалс€ по завершению
 
         _fader.FadeIn();
-
+        
         yield return WaitForFadeEnd;
 
         if (_activeRoomIndex + 1 == _rooms.Count)
@@ -48,6 +49,6 @@ public class RoomSwitcher : MonoBehaviour
             _enemyCollector.CollectAllEnemiesAndSubscribe();
         }
 
-        yield return null;
+        yield return null; // зачем это тут?
     }
 }

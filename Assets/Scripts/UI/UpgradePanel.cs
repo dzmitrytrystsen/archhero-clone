@@ -16,10 +16,10 @@ public class UpgradePanel : MonoBehaviour
 
         for (int i = 0; i < _upgradeIcons.Length; i++)
         {
-            Upgrade randomUpgrade = PlayerUpgrades.Instance.RandomUpgrade;
+            Upgrade randomUpgrade = PlayerUpgrades.Instance.RandomUpgrade; 
             _upgradeIcons[i].GetComponent<Image>().sprite = randomUpgrade.SpriteImage;
 
-            Text upgradeIconText = _upgradeIcons[i].GetComponentInChildren<Text>();
+            Text upgradeIconText = _upgradeIcons[i].GetComponentInChildren<Text>(); // красивее было бы чтобы инициализацию данных спрятать в UpgradeIcon. Ты туда передаешь Upgrade а он сам все инициализирует и настраивает. ООП в действии))
             upgradeIconText.text = randomUpgrade.Title.ToString();
 
             Button upgradeButton = _upgradeIcons[i].GetComponent<Button>();
