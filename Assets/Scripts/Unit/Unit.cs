@@ -20,7 +20,7 @@ public abstract class Unit : MonoBehaviour, IAttackable
         OnHealthChanged?.Invoke(_health, gameObject);
     }
 
-    protected virtual void FixedUpdate()
+    protected virtual void FixedUpdate() // ”дал€й не используемые методы Unity в цел€х оптимизации
     {
 
     }
