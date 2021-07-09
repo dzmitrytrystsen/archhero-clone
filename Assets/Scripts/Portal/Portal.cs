@@ -10,7 +10,7 @@ public class Portal : MonoBehaviour
 
     private BoxCollider _boxCollider;
 
-    private void Start()
+    private void Awake()
     {
         _boxCollider = GetComponent<BoxCollider>();
     }

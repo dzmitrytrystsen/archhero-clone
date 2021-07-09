@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerUpgrades : Singleton<PlayerUpgrades>
 {
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     public Upgrade RandomUpgrade { get { return GetRandomUpgrade(); } }
 
     public List<Upgrade> AllUpgrades { get { return _allUpgrades; } }

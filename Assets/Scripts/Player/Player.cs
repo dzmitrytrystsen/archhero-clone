@@ -19,7 +19,7 @@ public class Player : Unit
     public delegate void MaxHealthIncreaseAction(int newMaxHealthValue);
     public event MaxHealthIncreaseAction OnHealthIncreased;
 
-    public event MaxHealthIncreaseAction OnHealed; // events обычно пишут в самом верху класса
+    public event MaxHealthIncreaseAction OnHealed; // events ?????? ????? ? ????? ????? ??????
 
     [SerializeField] public Animator Animator;
     public Joystick Joystick { get { return _joystick; } }
@@ -30,13 +30,14 @@ public class Player : Unit
     [SerializeField] private PlayerStats _playerStats;
 
     private GameObject _targetPointer;
+    private AudioSource _audioSource;
 
     private Joystick _joystick;
     private CharacterController _characterController;
 
     private Vector3 _moveDirection;
     private Enemy[] _enemies;
-    private Enemy _nearestEnemy; // зачем тут эта переменная если она используется только в одном месте. просто можно сделать чтобы DetectNearestEnemy возвращал врага когда это нужно. незачем постоянно хранить его
+    private Enemy _nearestEnemy; // ????? ??? ??? ?????????? ???? ??? ???????????? ?????? ? ????? ?????. ?????? ????? ??????? ????? DetectNearestEnemy ????????? ????? ????? ??? ?????. ??????? ????????? ??????? ???
     private bool _ifShooted;
 
     private Dictionary<Type, IPlayerBehavior> _behaviorsMap;
@@ -47,6 +48,7 @@ public class Player : Unit
         _health = _playerStats.MaxHealth;
 
         _joystick = FindObjectOfType<Joystick>();
+        _audioSource = GetComponent<AudioSource>();
         _characterController = FindObjectOfType<CharacterController>();
         _joystick.OnDragHappend += SetBehaviorMoving;
         _joystick.OnDragEnded += SetBehaviorIdle;
@@ -69,8 +71,15 @@ public class Player : Unit
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
         if (_currentBehavior != null)
             _currentBehavior.FixedUpdate(this);
+
+        if (transform.position.y > 0.25f)
+        {
+            Vector3 groundedPosition = new Vector3(transform.position.x, 0.25f, transform.position.z);
+            transform.position = groundedPosition;
+        }
     }
 
     private void Update()
@@ -133,7 +142,9 @@ public class Player : Unit
                 currentProjectile.transform.position = transform.position;
                 currentProjectile.GetComponent<GeneralProjectile>().SetDamage = _playerStats.Damage;
                 currentProjectile.SetActive(true);
+                currentProjectile.GetComponent<GeneralProjectile>().OnReadyToReturnToThePool += AskToPlayProjectileImpactSound;
                 currentProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * force, ForceMode.Impulse);
+                AudioEffects.Instance.PlaySoundEffect(NameOfSoundEffect.ProjectileEffect, _audioSource);
 
                 StartCoroutine(ShootAndWait());
                 _ifShooted = true;
@@ -190,6 +201,11 @@ public class Player : Unit
         CollectAllEnemies();
 
         return _enemies.Length > 0;
+    }
+
+    private void AskToPlayProjectileImpactSound(GameObject projectile)
+    {
+        AudioEffects.Instance.PlaySoundEffect(NameOfSoundEffect.ProjectileImpact, _audioSource);
     }
 
     private void InitBehaviors()
